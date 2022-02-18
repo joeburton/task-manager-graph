@@ -1,4 +1,4 @@
-import Todo from './models/Todo.js';
+import Todo from './models/Todo';
 
 const resolvers = {
   Query: {
@@ -6,12 +6,12 @@ const resolvers = {
       const todos = await Todo.find();
       return todos;
     },
-    getTodo: async (_root, args) => {
+    getTodo: async (root: any, args: any) => {
       return await Todo.findById(args.id);
     },
   },
   Mutation: {
-    addTodo: async (root, args) => {
+    addTodo: async (root: any, args: any) => {
       const newTodo = new Todo({
         title: args.title,
         detail: args.detail,
