@@ -31,9 +31,9 @@ query GetTodo {
   }
 }
 
-### Add Todos
-
 ```
+
+### Add Todos
 
 ```
 mutation AddTodo {
@@ -48,8 +48,4 @@ mutation AddTodo {
     date
   }
 }
-```
-
-```
-
 ```
