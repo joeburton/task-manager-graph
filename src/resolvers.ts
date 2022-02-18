@@ -6,7 +6,7 @@ const resolvers = {
       const todos = await Todo.find();
       return todos;
     },
-    getTodo: async (root, args) => {
+    getTodo: async (_root, args) => {
       return await Todo.findById(args.id);
     },
   },
