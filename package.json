@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "npx tsc -w",
-    "watch": "nodemon --watch './**/*.{ts,graphql}' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm' api/index.ts",
+    "watch": "nodemon --watch './**/*.{ts,graphql}' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm' src/index.ts",
     "dev": "tsc-watch --onSuccess \"npm run watch\"",
     "build": "tsc -p ."
   },
