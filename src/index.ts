@@ -10,14 +10,15 @@ import dotenv from 'dotenv';
 import typeDefs from './typeDefs.js';
 import resolvers from './resolvers.js';
 
+dotenv.config();
+
+const app = express();
+app.use(cors());
+
+const httpServer = http.createServer(app);
+
 async function listen(port: number) {
-  const app = express();
-  app.use(cors());
-  dotenv.config();
-
-  const dbConnectionString = process.env.mongodb || '';
-
-  const httpServer = http.createServer(app);
+  const DB_CONNECTION_STRING = process.env.MONGODB || '';
 
   const server = new ApolloServer({
     typeDefs,
@@ -29,7 +30,7 @@ async function listen(port: number) {
   server.applyMiddleware({ app });
 
   try {
-    await mongoose.connect(dbConnectionString);
+    await mongoose.connect(DB_CONNECTION_STRING);
     console.log(`Mongoose connected on port ${port}`);
   } catch (error) {
     console.log(error);
@@ -40,7 +41,7 @@ async function listen(port: number) {
   });
 }
 
-async function main() {
+async function startApolloServer() {
   try {
     await listen(4000);
     console.log('🚀 Server is ready at http://localhost:4000/graphql');
@@ -49,4 +50,7 @@ async function main() {
   }
 }
 
-main();
+startApolloServer();
+
+// Export the http server so that Vercel can start it:
+export default httpServer;
