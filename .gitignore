@@ -1,0 +1,9 @@
+node_modules
+.DS_Store
+.next
+coverage
+notes.txt
+cypress/screenshots
+cypress/videos
+.vercel
+.env
