@@ -35,21 +35,19 @@ query GetTodo {
 
 ```
 
-mutation AddTodo {
-addTodo(
-title: "first todo"
-detail: "first detail first detail first detail"
-date: "2021-9-10"
-) {
-id
-title
-detail
-date
-}
-}
-
 ```
-
+mutation AddTodo {
+  addTodo(
+    title: "first todo"
+    detail: "first detail first detail first detail"
+    date: "2021-9-10"
+  ) {
+    id
+    title
+    detail
+    date
+  }
+}
 ```
 
 ```
