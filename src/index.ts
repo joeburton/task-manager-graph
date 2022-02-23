@@ -31,9 +31,8 @@ async function listen(port: number) {
 
   try {
     await mongoose.connect(DB_CONNECTION_STRING);
-    console.log(`Mongoose connected on port ${port}`);
   } catch (error) {
-    console.log(error);
+    console.log(`Error: `, error);
   }
 
   return new Promise((resolve, reject) => {

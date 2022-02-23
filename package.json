@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "watch": "nodemon --watch './**/*.{ts,graphql}' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm' src/index.ts",
-    "dev": "tsc-watch --onSuccess \"npm run watch\"",
+    "watch": "npx nodemon --watch src/index.ts",
     "build": "tsc -p .",
     "start": "node api/index.js"
   },
