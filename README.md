@@ -3,7 +3,7 @@
 ```
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://apollo-3-mongoose-integration-logf2i0a5-joeburton.vercel.app/graphql' \
+  --url 'https://apollo-3-mongoose-integration.vercel.app/graphql' \
   --data '{"query":"{\n    getTodos {id, title, detail, date}\n}","variables":{}}'
 ```
 
