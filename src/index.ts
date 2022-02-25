@@ -5,15 +5,15 @@ import http from 'http';
 
 import mongoose from 'mongoose';
 import cors from 'cors';
-import dotenv from 'dotenv';
+import 'dotenv/config';
 
 import typeDefs from './typeDefs';
 import resolvers from './resolvers';
 
-dotenv.config();
-
 const app = express();
 app.use(cors());
+
+console.log(process.env.NODE_ENV);
 
 const httpServer = http.createServer(app);
 

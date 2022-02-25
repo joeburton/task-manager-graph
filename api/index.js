@@ -18,12 +18,12 @@ const express_1 = __importDefault(require("express"));
 const http_1 = __importDefault(require("http"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
-const dotenv_1 = __importDefault(require("dotenv"));
+require("dotenv/config");
 const typeDefs_1 = __importDefault(require("./typeDefs"));
 const resolvers_1 = __importDefault(require("./resolvers"));
-dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
+console.log(process.env.NODE_ENV);
 const httpServer = http_1.default.createServer(app);
 function listen(port) {
     return __awaiter(this, void 0, void 0, function* () {

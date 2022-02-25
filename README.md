@@ -49,3 +49,30 @@ mutation AddTodo {
   }
 }
 ```
+
+### Delete Todo
+
+```
+mutation DeleteTodo {
+  deleteTodo(id:"620e73faae4bd45177b8538f")
+}
+```
+
+### Update Todo
+
+```
+mutation UpdateTodo {
+  updateTodo(id: "620e7406ae4bd45177b85391", title: "This2 is a new titl22e2") {
+    id
+    title
+  }
+}
+```
+
+### Delete Many
+
+```
+mutation DeleteBulk {
+  deleteBulk(title: "the title")
+}
+```

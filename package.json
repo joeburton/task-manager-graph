@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "watch": "npx nodemon --watch src/index.ts",
+    "watch": "NODE_ENV=development nodemon src/index.ts",
     "build": "tsc -p .",
-    "start": "node api/index.js"
+    "start": "NODE_ENV=production node api/index.js"
   },
   "keywords": [],
   "author": "",

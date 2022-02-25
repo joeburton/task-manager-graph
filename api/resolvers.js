@@ -33,6 +33,29 @@ const resolvers = {
             yield newTodo.save();
             return newTodo;
         }),
+        deleteTodo: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            yield Todo_1.default.findByIdAndDelete(args.id);
+            return 'The todo has been deleted.';
+        }),
+        deleteBulk: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            const result = yield Todo_1.default.deleteMany({ title: args.title });
+            return JSON.stringify(result);
+        }),
+        updateTodo: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            const { id, title, detail, date } = args;
+            const updatedTodo = {};
+            if (title !== undefined) {
+                updatedTodo.title = title;
+            }
+            if (detail !== undefined) {
+                updatedTodo.detail = detail;
+            }
+            if (date !== undefined) {
+                updatedTodo.date = date;
+            }
+            const todo = yield Todo_1.default.findByIdAndUpdate(id, updatedTodo, { new: true });
+            return todo;
+        }),
     },
 };
 exports.default = resolvers;

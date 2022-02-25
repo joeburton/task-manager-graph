@@ -1,4 +1,4 @@
-import Todo from './models/Todo';
+import Todo, { TodoInterface } from './models/Todo';
 
 const resolvers = {
   Query: {
@@ -19,6 +19,33 @@ const resolvers = {
       });
       await newTodo.save();
       return newTodo;
+    },
+    deleteTodo: async (root: any, args: any) => {
+      await Todo.findByIdAndDelete(args.id);
+      return 'The todo has been deleted.';
+    },
+    deleteBulk: async (root: any, args: any) => {
+      const result = await Todo.deleteMany({ title: args.title });
+      return JSON.stringify(result);
+    },
+    updateTodo: async (root: any, args: any) => {
+      const { id, title, detail, date } = args;
+      const updatedTodo = {} as TodoInterface;
+
+      if (title !== undefined) {
+        updatedTodo.title = title;
+      }
+
+      if (detail !== undefined) {
+        updatedTodo.detail = detail;
+      }
+
+      if (date !== undefined) {
+        updatedTodo.date = date;
+      }
+
+      const todo = await Todo.findByIdAndUpdate(id, updatedTodo, { new: true });
+      return todo;
     },
   },
 };

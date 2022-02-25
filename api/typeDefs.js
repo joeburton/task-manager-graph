@@ -15,6 +15,9 @@ const typeDefs = (0, apollo_server_express_1.gql) `
   }
   type Mutation {
     addTodo(title: String, detail: String, date: Date): Todo
+    deleteTodo(id: ID): String
+    deleteBulk(title: String): String
+    updateTodo(id: String, title: String, detail: String, date: Date): Todo
   }
 `;
 exports.default = typeDefs;

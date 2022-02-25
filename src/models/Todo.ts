@@ -2,7 +2,13 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const todoSchema = new Schema(
+export interface TodoInterface {
+  title: string;
+  detail: string;
+  date: Date;
+}
+
+const todoSchema = new Schema<TodoInterface>(
   {
     title: {
       type: String,
