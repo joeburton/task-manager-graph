@@ -28,6 +28,7 @@ const resolvers = {
             const newTodo = new Todo_1.default({
                 title: args.title,
                 detail: args.detail,
+                complete: args.complete,
                 date: args.date,
             });
             yield newTodo.save();
@@ -42,13 +43,16 @@ const resolvers = {
             return JSON.stringify(result);
         }),
         updateTodo: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            const { id, title, detail, date } = args;
+            const { id, title, detail, complete, date } = args;
             const updatedTodo = {};
             if (title !== undefined) {
                 updatedTodo.title = title;
             }
             if (detail !== undefined) {
                 updatedTodo.detail = detail;
+            }
+            if (complete !== undefined) {
+                updatedTodo.complete = complete;
             }
             if (date !== undefined) {
                 updatedTodo.date = date;

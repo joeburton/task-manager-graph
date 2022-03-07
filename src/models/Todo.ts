@@ -6,6 +6,7 @@ export interface TodoInterface {
   title: string;
   detail: string;
   date: Date;
+  complete: boolean;
 }
 
 const todoSchema = new Schema<TodoInterface>(
@@ -15,6 +16,7 @@ const todoSchema = new Schema<TodoInterface>(
       required: true,
     },
     detail: String,
+    complete: Boolean,
     date: Date,
   },
   { timestamps: true }

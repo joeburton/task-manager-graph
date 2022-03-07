@@ -15,6 +15,7 @@ const resolvers = {
       const newTodo = new Todo({
         title: args.title,
         detail: args.detail,
+        complete: args.complete,
         date: args.date,
       });
       await newTodo.save();
@@ -29,7 +30,7 @@ const resolvers = {
       return JSON.stringify(result);
     },
     updateTodo: async (root: any, args: any) => {
-      const { id, title, detail, date } = args;
+      const { id, title, detail, complete, date } = args;
       const updatedTodo = {} as TodoInterface;
 
       if (title !== undefined) {
@@ -40,11 +41,16 @@ const resolvers = {
         updatedTodo.detail = detail;
       }
 
+      if (complete !== undefined) {
+        updatedTodo.complete = complete;
+      }
+
       if (date !== undefined) {
         updatedTodo.date = date;
       }
 
       const todo = await Todo.findByIdAndUpdate(id, updatedTodo, { new: true });
+
       return todo;
     },
   },

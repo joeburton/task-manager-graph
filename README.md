@@ -7,6 +7,18 @@ curl --request POST \
   --data '{"query":"{\n    getTodos {id, title, detail, date}\n}","variables":{}}'
 ```
 
+### Get Todo
+
+```
+query GetTodo {
+  getTodo(id: "620f98b37032aa7e334bab17") {
+    title
+    detail
+  }
+}
+
+```
+
 ### Get Todos
 
 ```
@@ -16,18 +28,6 @@ query GetTodos {
     title
     detail
     date
-  }
-}
-
-```
-
-### Get Todo
-
-```
-query GetTodo {
-  getTodo(id: "620f98b37032aa7e334bab17") {
-    title
-    detail
   }
 }
 
