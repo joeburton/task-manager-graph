@@ -7,6 +7,7 @@ const typeDefs = (0, apollo_server_express_1.gql) `
     id: ID
     title: String
     detail: String
+    complete: Boolean
     date: Date
   }
   type Query {
