@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 export interface TodoInterface {
   title: string;
   detail: string;
-  date: Date;
   complete: boolean;
+  date: Date;
 }
 
 const todoSchema = new Schema<TodoInterface>(

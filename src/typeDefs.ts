@@ -6,6 +6,7 @@ const typeDefs = gql`
     id: ID
     title: String
     detail: String
+    complete: Boolean
     date: Date
   }
   type Query {
