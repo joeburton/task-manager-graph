@@ -1,7 +1,7 @@
 import Todo, { TodoInterface } from './models/Todo';
 import { GraphQLScalarType, Kind } from 'graphql';
 
-const dateScalar = new GraphQLScalarType({
+const ScalarDate = new GraphQLScalarType({
   name: 'Date',
   description: 'Date custom scalar type',
   serialize(value: any) {
@@ -19,7 +19,7 @@ const dateScalar = new GraphQLScalarType({
 });
 
 const resolvers = {
-  Date: dateScalar,
+  Date: ScalarDate,
   Query: {
     getTodos: async () => {
       const todos = await Todo.find();
