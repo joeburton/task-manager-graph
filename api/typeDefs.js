@@ -19,7 +19,7 @@ const typeDefs = (0, apollo_server_express_1.gql) `
     deleteTodo(id: ID): String
     deleteBulk(title: String): String
     updateTodo(
-      id: String
+      id: ID
       title: String
       detail: String
       complete: Boolean
