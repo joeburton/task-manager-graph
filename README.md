@@ -11,12 +11,13 @@ curl --request POST \
 
 ```
 query GetTodo {
-  getTodo(id: "620f98b37032aa7e334bab17") {
+  getTodo(id: "62262b1d221387163eacaba5") {
+    id
     title
     detail
+    complete
   }
 }
-
 ```
 
 ### Get Todos
@@ -27,10 +28,10 @@ query GetTodos {
     id
     title
     detail
+    complete
     date
   }
 }
-
 ```
 
 ### Add Todos
@@ -38,13 +39,15 @@ query GetTodos {
 ```
 mutation AddTodo {
   addTodo(
-    title: "first todo"
+    title: "another 2"
     detail: "first detail first detail first detail"
-    date: "2021-9-10"
+    date: "2022-03-07"
+    complete: false
   ) {
     id
     title
     detail
+    complete
     date
   }
 }
