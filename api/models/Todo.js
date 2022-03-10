@@ -10,6 +10,7 @@ const todoSchema = new Schema({
         type: String,
         required: true,
     },
+    listId: String,
     detail: String,
     complete: Boolean,
     date: Date,

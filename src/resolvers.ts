@@ -33,6 +33,7 @@ const resolvers = {
     addTodo: async (root: any, args: any) => {
       const newTodo = new Todo({
         title: args.title,
+        listId: args.listId,
         detail: args.detail,
         complete: args.complete,
         date: args.date,
@@ -49,11 +50,17 @@ const resolvers = {
       return JSON.stringify(result);
     },
     updateTodo: async (root: any, args: any) => {
-      const { id, title, detail, complete, date } = args;
+      const { id, listId, title, detail, complete, date } = args;
       const updatedTodo = {} as TodoInterface;
+
+      console.log({ id, title, listId, detail, complete, date });
 
       if (title !== undefined) {
         updatedTodo.title = title;
+      }
+
+      if (listId !== undefined) {
+        updatedTodo.listId = listId;
       }
 
       if (detail !== undefined) {
