@@ -2,6 +2,9 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
+export interface ListIdInterface {
+  listId: string;
+}
 export interface TodoInterface {
   title: string;
   listId: string;
@@ -24,6 +27,9 @@ const todoSchema = new Schema<TodoInterface>(
   { timestamps: true }
 );
 
-const Todo = mongoose.model('todo', todoSchema);
+const listIdSchema = new Schema<ListIdInterface>({
+  listId: String,
+});
 
-export default Todo;
+export const Todo = mongoose.model('todo', todoSchema);
+export const ListId = mongoose.model('listId', listIdSchema);

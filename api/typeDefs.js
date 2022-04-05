@@ -11,11 +11,16 @@ const typeDefs = (0, apollo_server_express_1.gql) `
     complete: Boolean
     date: Date
   }
+  type ListId {
+    listId: String
+  }
   type Query {
+    getListIds: [ListId]
     getTodos: [Todo]
     getTodo(id: ID): Todo
   }
   type Mutation {
+    addListId(listId: String): ListId
     addTodo(
       listId: String
       title: String

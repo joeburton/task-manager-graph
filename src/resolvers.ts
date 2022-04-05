@@ -1,4 +1,4 @@
-import Todo, { TodoInterface } from './models/Todo';
+import { Todo, ListId, TodoInterface } from './models/Todo';
 import { GraphQLScalarType, Kind } from 'graphql';
 
 const ScalarDate = new GraphQLScalarType({
@@ -21,6 +21,10 @@ const ScalarDate = new GraphQLScalarType({
 const resolvers = {
   Date: ScalarDate,
   Query: {
+    getListIds: async () => {
+      const listIds = await ListId.find();
+      return listIds;
+    },
     getTodos: async () => {
       const todos = await Todo.find();
       return todos;
@@ -30,6 +34,13 @@ const resolvers = {
     },
   },
   Mutation: {
+    addListId: async (root: any, args: any) => {
+      const newList = new ListId({
+        listId: args.listId,
+      });
+      await newList.save();
+      return newList;
+    },
     addTodo: async (root: any, args: any) => {
       const newTodo = new Todo({
         title: args.title,
