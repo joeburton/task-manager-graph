@@ -12,6 +12,7 @@ const typeDefs = gql`
   }
   type ListId {
     listId: String
+    id: ID
   }
   type Query {
     getListIds: [ListId]
@@ -20,6 +21,7 @@ const typeDefs = gql`
   }
   type Mutation {
     addListId(listId: String): ListId
+    deleteListId(id: ID): String
     addTodo(
       listId: String
       title: String

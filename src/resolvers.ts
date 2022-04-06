@@ -34,6 +34,10 @@ const resolvers = {
     },
   },
   Mutation: {
+    deleteListId: async (root: any, args: any) => {
+      await ListId.findByIdAndDelete(args.id);
+      return 'The list ID has been deleted.';
+    },
     addListId: async (root: any, args: any) => {
       const newList = new ListId({
         listId: args.listId,

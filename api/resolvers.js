@@ -43,6 +43,10 @@ const resolvers = {
         }),
     },
     Mutation: {
+        deleteListId: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            yield Todo_1.ListId.findByIdAndDelete(args.id);
+            return 'The list ID has been deleted.';
+        }),
         addListId: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
             const newList = new Todo_1.ListId({
                 listId: args.listId,

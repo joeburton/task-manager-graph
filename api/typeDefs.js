@@ -13,6 +13,7 @@ const typeDefs = (0, apollo_server_express_1.gql) `
   }
   type ListId {
     listId: String
+    id: ID
   }
   type Query {
     getListIds: [ListId]
@@ -21,6 +22,7 @@ const typeDefs = (0, apollo_server_express_1.gql) `
   }
   type Mutation {
     addListId(listId: String): ListId
+    deleteListId(id: ID): String
     addTodo(
       listId: String
       title: String
