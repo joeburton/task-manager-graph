@@ -1,4 +1,4 @@
-import { Todo, ListId, TodoInterface } from './models/Todo';
+import { Todo, listName, TodoInterface } from './models/Todo';
 import { GraphQLScalarType, Kind } from 'graphql';
 
 const ScalarDate = new GraphQLScalarType({
@@ -21,9 +21,9 @@ const ScalarDate = new GraphQLScalarType({
 const resolvers = {
   Date: ScalarDate,
   Query: {
-    getListIds: async () => {
-      const listIds = await ListId.find();
-      return listIds;
+    getListNames: async () => {
+      const listNames = await listName.find();
+      return listNames;
     },
     getTodos: async () => {
       const todos = await Todo.find();
@@ -34,13 +34,13 @@ const resolvers = {
     },
   },
   Mutation: {
-    deleteListId: async (root: any, args: any) => {
-      await ListId.findByIdAndDelete(args.id);
+    deleteListName: async (root: any, args: any) => {
+      await listName.findByIdAndDelete(args.id);
       return 'The list ID has been deleted.';
     },
-    addListId: async (root: any, args: any) => {
-      const newList = new ListId({
-        listId: args.listId,
+    addListName: async (root: any, args: any) => {
+      const newList = new listName({
+        listName: args.listName,
       });
       await newList.save();
       return newList;
@@ -48,7 +48,7 @@ const resolvers = {
     addTodo: async (root: any, args: any) => {
       const newTodo = new Todo({
         title: args.title,
-        listId: args.listId,
+        listName: args.listName,
         detail: args.detail,
         complete: args.complete,
         date: args.date,
@@ -65,17 +65,17 @@ const resolvers = {
       return JSON.stringify(result);
     },
     updateTodo: async (root: any, args: any) => {
-      const { id, listId, title, detail, complete, date } = args;
+      const { id, listName, title, detail, complete, date } = args;
       const updatedTodo = {} as TodoInterface;
 
-      console.log({ id, title, listId, detail, complete, date });
+      console.log({ id, title, listName, detail, complete, date });
 
       if (title !== undefined) {
         updatedTodo.title = title;
       }
 
-      if (listId !== undefined) {
-        updatedTodo.listId = listId;
+      if (listName !== undefined) {
+        updatedTodo.listName = listName;
       }
 
       if (detail !== undefined) {

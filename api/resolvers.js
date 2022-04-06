@@ -30,9 +30,9 @@ const ScalarDate = new graphql_1.GraphQLScalarType({
 const resolvers = {
     Date: ScalarDate,
     Query: {
-        getListIds: () => __awaiter(void 0, void 0, void 0, function* () {
-            const listIds = yield Todo_1.ListId.find();
-            return listIds;
+        getListNames: () => __awaiter(void 0, void 0, void 0, function* () {
+            const listNames = yield Todo_1.listName.find();
+            return listNames;
         }),
         getTodos: () => __awaiter(void 0, void 0, void 0, function* () {
             const todos = yield Todo_1.Todo.find();
@@ -43,13 +43,13 @@ const resolvers = {
         }),
     },
     Mutation: {
-        deleteListId: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            yield Todo_1.ListId.findByIdAndDelete(args.id);
+        deleteListName: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            yield Todo_1.listName.findByIdAndDelete(args.id);
             return 'The list ID has been deleted.';
         }),
-        addListId: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            const newList = new Todo_1.ListId({
-                listId: args.listId,
+        addListName: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            const newList = new Todo_1.listName({
+                listName: args.listName,
             });
             yield newList.save();
             return newList;
@@ -57,7 +57,7 @@ const resolvers = {
         addTodo: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
             const newTodo = new Todo_1.Todo({
                 title: args.title,
-                listId: args.listId,
+                listName: args.listName,
                 detail: args.detail,
                 complete: args.complete,
                 date: args.date,
@@ -74,14 +74,14 @@ const resolvers = {
             return JSON.stringify(result);
         }),
         updateTodo: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            const { id, listId, title, detail, complete, date } = args;
+            const { id, listName, title, detail, complete, date } = args;
             const updatedTodo = {};
-            console.log({ id, title, listId, detail, complete, date });
+            console.log({ id, title, listName, detail, complete, date });
             if (title !== undefined) {
                 updatedTodo.title = title;
             }
-            if (listId !== undefined) {
-                updatedTodo.listId = listId;
+            if (listName !== undefined) {
+                updatedTodo.listName = listName;
             }
             if (detail !== undefined) {
                 updatedTodo.detail = detail;

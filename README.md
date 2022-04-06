@@ -13,7 +13,7 @@ curl --request POST \
 query GetTodo {
   getTodo(id: "62262b1d221387163eacaba5") {
     id
-    listId
+    listName
     title
     detail
     complete
@@ -28,7 +28,7 @@ query GetTodo {
 query GetTodos {
   getTodos {
     id
-    listId
+    listName
     title
     detail
     complete
@@ -43,13 +43,13 @@ query GetTodos {
 mutation AddTodo {
   addTodo(
     title: "create id"
-    listId: "tech"
+    listName: "tech"
     detail: "first detail first detail first detail"
     date: "2021-03-07"
     complete: true
   ) {
     id
-    listId
+    listName
     title
     detail
     complete
@@ -61,10 +61,10 @@ mutation AddTodo {
 ### Add Todo with payload
 
 ```
-mutation AddTodo($listId: String, $title: String, $detail: String, $complete: Boolean, $date: Date) {
-  addTodo(listId: $listId, title: $title, detail: $detail, complete: $complete, date: $date) {
+mutation AddTodo($listName: String, $title: String, $detail: String, $complete: Boolean, $date: Date) {
+  addTodo(listName: $listName, title: $title, detail: $detail, complete: $complete, date: $date) {
     id
-    listId
+    listName
     title
     detail
     complete
@@ -75,7 +75,7 @@ mutation AddTodo($listId: String, $title: String, $detail: String, $complete: Bo
 // Payload
 {
   "title": "Build AWS pipeline",
-  "listId": "tech",
+  "listName": "tech",
   "detail": "Build AWS pipeline",
   "complete": false,
   "date": 1645660800000
@@ -96,10 +96,10 @@ mutation UpdateTodo {
 ### Update Todo with payload
 
 ```
-mutation UpdateTodo($id: ID, $listId: String, $title: String, $detail: String, $complete: Boolean, $date: Date) {
-  updateTodo(id: $id, listId: $listId, title: $title, detail: $detail, complete: $complete, date: $date) {
+mutation UpdateTodo($id: ID, $listName: String, $title: String, $detail: String, $complete: Boolean, $date: Date) {
+  updateTodo(id: $id, listName: $listName, title: $title, detail: $detail, complete: $complete, date: $date) {
     id
-    listId
+    listName
     title
     detail
     complete
@@ -110,7 +110,7 @@ mutation UpdateTodo($id: ID, $listId: String, $title: String, $detail: String, $
 // Payload
 {
   "id": "622b19beef69ae3c2c02a9c7",
-  "listId": "general",
+  "listName": "general",
   "title": "Fix toilet pan",
   "detail": "not much",
   "complete": true,

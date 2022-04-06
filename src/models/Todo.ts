@@ -2,12 +2,12 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-export interface ListIdInterface {
-  listId: string;
+export interface listNameInterface {
+  listName: string;
 }
 export interface TodoInterface {
   title: string;
-  listId: string;
+  listName: string;
   detail: string;
   complete: boolean;
   date: Date;
@@ -19,7 +19,7 @@ const todoSchema = new Schema<TodoInterface>(
       type: String,
       required: true,
     },
-    listId: String,
+    listName: String,
     detail: String,
     complete: Boolean,
     date: Date,
@@ -27,9 +27,9 @@ const todoSchema = new Schema<TodoInterface>(
   { timestamps: true }
 );
 
-const listIdSchema = new Schema<ListIdInterface>({
-  listId: String,
+const listNameSchema = new Schema<listNameInterface>({
+  listName: String,
 });
 
 export const Todo = mongoose.model('todo', todoSchema);
-export const ListId = mongoose.model('listId', listIdSchema);
+export const listName = mongoose.model('listName', listNameSchema);

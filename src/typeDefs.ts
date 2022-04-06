@@ -4,26 +4,26 @@ const typeDefs = gql`
   scalar Date
   type Todo {
     id: ID
-    listId: String
+    listName: String
     title: String
     detail: String
     complete: Boolean
     date: Date
   }
-  type ListId {
-    listId: String
+  type listName {
+    listName: String
     id: ID
   }
   type Query {
-    getListIds: [ListId]
+    getListNames: [listName]
     getTodos: [Todo]
     getTodo(id: ID): Todo
   }
   type Mutation {
-    addListId(listId: String): ListId
-    deleteListId(id: ID): String
+    addListName(listName: String): listName
+    deleteListName(id: ID): String
     addTodo(
-      listId: String
+      listName: String
       title: String
       detail: String
       complete: Boolean
@@ -33,7 +33,7 @@ const typeDefs = gql`
     deleteBulk(title: String): String
     updateTodo(
       id: ID
-      listId: String
+      listName: String
       title: String
       detail: String
       complete: Boolean
