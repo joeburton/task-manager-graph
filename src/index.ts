@@ -13,11 +13,14 @@ import resolvers from './resolvers';
 const app = express();
 app.use(cors());
 
+console.log(process.env.NODE_ENV);
+
 const httpServer = http.createServer(app);
 
 async function listen(port: number) {
   const DB_CONNECTION_STRING = process.env.MONGODB || '';
 
+  console.log(DB_CONNECTION_STRING);
   const server = new ApolloServer({
     typeDefs,
     resolvers,
