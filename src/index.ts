@@ -13,8 +13,6 @@ import resolvers from './resolvers';
 const app = express();
 app.use(cors());
 
-console.log(process.env.NODE_ENV);
-
 const httpServer = http.createServer(app);
 
 async function listen(port: number) {

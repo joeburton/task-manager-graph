@@ -1,9 +1,20 @@
 # apollo-3-mongoose-integration
 
+#Live
+
 ```
 curl --request POST \
   --header 'content-type: application/json' \
   --url 'https://apollo-3-mongoose-integration.vercel.app/graphql' \
+  --data '{"query":"{\n    getTodos {id, title, detail, complete, date}\n}","variables":{}}'
+```
+
+#Local
+
+```
+curl --request POST \
+  --header 'content-type: application/json' \
+  --url 'http://localhost:4000/graphql' \
   --data '{"query":"{\n    getTodos {id, title, detail, complete, date}\n}","variables":{}}'
 ```
 

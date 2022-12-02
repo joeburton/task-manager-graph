@@ -23,7 +23,6 @@ const typeDefs_1 = __importDefault(require("./typeDefs"));
 const resolvers_1 = __importDefault(require("./resolvers"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
-console.log(process.env.NODE_ENV);
 const httpServer = http_1.default.createServer(app);
 function listen(port) {
     return __awaiter(this, void 0, void 0, function* () {
