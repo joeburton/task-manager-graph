@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Todo_1 = require("./models/Todo");
+const Task_1 = require("./models/Task");
 const graphql_1 = require("graphql");
 const ScalarDate = new graphql_1.GraphQLScalarType({
-    name: 'Date',
-    description: 'Date custom scalar type',
+    name: "Date",
+    description: "Date custom scalar type",
     serialize(value) {
         return new Date(value).toLocaleDateString(); // Convert outgoing Date to integer for JSON
     },
@@ -31,69 +31,69 @@ const resolvers = {
     Date: ScalarDate,
     Query: {
         getListNames: () => __awaiter(void 0, void 0, void 0, function* () {
-            const listNames = yield Todo_1.listName.find();
+            const listNames = yield Task_1.listName.find();
             return listNames;
         }),
-        getTodos: () => __awaiter(void 0, void 0, void 0, function* () {
-            const todos = yield Todo_1.Todo.find();
-            return todos;
+        getTasks: () => __awaiter(void 0, void 0, void 0, function* () {
+            const tasks = yield Task_1.Task.find();
+            return tasks;
         }),
-        getTodo: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            return yield Todo_1.Todo.findById(args.id);
+        getTask: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            return yield Task_1.Task.findById(args.id);
         }),
     },
     Mutation: {
         deleteListName: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            yield Todo_1.listName.findByIdAndDelete(args.id);
-            return 'The list ID has been deleted.';
+            yield Task_1.listName.findByIdAndDelete(args.id);
+            return "The list ID has been deleted.";
         }),
         addListName: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            const newList = new Todo_1.listName({
+            const newList = new Task_1.listName({
                 listName: args.listName,
             });
             yield newList.save();
             return newList;
         }),
-        addTodo: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            const newTodo = new Todo_1.Todo({
+        addTask: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            const newTask = new Task_1.Task({
                 title: args.title,
                 listName: args.listName,
                 detail: args.detail,
                 complete: args.complete,
                 date: args.date,
             });
-            yield newTodo.save();
-            return newTodo;
+            yield newTask.save();
+            return newTask;
         }),
-        deleteTodo: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            yield Todo_1.Todo.findByIdAndDelete(args.id);
-            return 'The todo has been deleted.';
+        deleteTask: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            yield Task_1.Task.findByIdAndDelete(args.id);
+            return "The task has been deleted.";
         }),
         deleteBulk: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            const result = yield Todo_1.Todo.deleteMany({ title: args.title });
+            const result = yield Task_1.Task.deleteMany({ title: args.title });
             return JSON.stringify(result);
         }),
-        updateTodo: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
+        updateTask: (_root, args) => __awaiter(void 0, void 0, void 0, function* () {
             const { id, listName, title, detail, complete, date } = args;
-            const updatedTodo = {};
+            const updatedTask = {};
             console.log({ id, title, listName, detail, complete, date });
             if (title !== undefined) {
-                updatedTodo.title = title;
+                updatedTask.title = title;
             }
             if (listName !== undefined) {
-                updatedTodo.listName = listName;
+                updatedTask.listName = listName;
             }
             if (detail !== undefined) {
-                updatedTodo.detail = detail;
+                updatedTask.detail = detail;
             }
             if (complete !== undefined) {
-                updatedTodo.complete = complete;
+                updatedTask.complete = complete;
             }
             if (date !== undefined) {
-                updatedTodo.date = date;
+                updatedTask.date = date;
             }
-            const todo = yield Todo_1.Todo.findByIdAndUpdate(id, updatedTodo, { new: true });
-            return todo;
+            const task = yield Task_1.Task.findByIdAndUpdate(id, updatedTask, { new: true });
+            return task;
         }),
     },
 };

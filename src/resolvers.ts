@@ -1,9 +1,9 @@
-import { Todo, listName, TodoInterface } from './models/Todo';
-import { GraphQLScalarType, Kind } from 'graphql';
+import { Task, listName, TaskInterface } from "./models/Task";
+import { GraphQLScalarType, Kind } from "graphql";
 
 const ScalarDate = new GraphQLScalarType({
-  name: 'Date',
-  description: 'Date custom scalar type',
+  name: "Date",
+  description: "Date custom scalar type",
   serialize(value: any) {
     return new Date(value).toLocaleDateString(); // Convert outgoing Date to integer for JSON
   },
@@ -25,18 +25,18 @@ const resolvers = {
       const listNames = await listName.find();
       return listNames;
     },
-    getTodos: async () => {
-      const todos = await Todo.find();
-      return todos;
+    getTasks: async () => {
+      const tasks = await Task.find();
+      return tasks;
     },
-    getTodo: async (root: any, args: any) => {
-      return await Todo.findById(args.id);
+    getTask: async (root: any, args: any) => {
+      return await Task.findById(args.id);
     },
   },
   Mutation: {
     deleteListName: async (root: any, args: any) => {
       await listName.findByIdAndDelete(args.id);
-      return 'The list ID has been deleted.';
+      return "The list ID has been deleted.";
     },
     addListName: async (root: any, args: any) => {
       const newList = new listName({
@@ -45,54 +45,54 @@ const resolvers = {
       await newList.save();
       return newList;
     },
-    addTodo: async (root: any, args: any) => {
-      const newTodo = new Todo({
+    addTask: async (root: any, args: any) => {
+      const newTask = new Task({
         title: args.title,
         listName: args.listName,
         detail: args.detail,
         complete: args.complete,
         date: args.date,
       });
-      await newTodo.save();
-      return newTodo;
+      await newTask.save();
+      return newTask;
     },
-    deleteTodo: async (root: any, args: any) => {
-      await Todo.findByIdAndDelete(args.id);
-      return 'The todo has been deleted.';
+    deleteTask: async (root: any, args: any) => {
+      await Task.findByIdAndDelete(args.id);
+      return "The task has been deleted.";
     },
     deleteBulk: async (root: any, args: any) => {
-      const result = await Todo.deleteMany({ title: args.title });
+      const result = await Task.deleteMany({ title: args.title });
       return JSON.stringify(result);
     },
-    updateTodo: async (root: any, args: any) => {
+    updateTask: async (_root: any, args: any) => {
       const { id, listName, title, detail, complete, date } = args;
-      const updatedTodo = {} as TodoInterface;
+      const updatedTask = {} as TaskInterface;
 
       console.log({ id, title, listName, detail, complete, date });
 
       if (title !== undefined) {
-        updatedTodo.title = title;
+        updatedTask.title = title;
       }
 
       if (listName !== undefined) {
-        updatedTodo.listName = listName;
+        updatedTask.listName = listName;
       }
 
       if (detail !== undefined) {
-        updatedTodo.detail = detail;
+        updatedTask.detail = detail;
       }
 
       if (complete !== undefined) {
-        updatedTodo.complete = complete;
+        updatedTask.complete = complete;
       }
 
       if (date !== undefined) {
-        updatedTodo.date = date;
+        updatedTask.date = date;
       }
 
-      const todo = await Todo.findByIdAndUpdate(id, updatedTodo, { new: true });
+      const task = await Task.findByIdAndUpdate(id, updatedTask, { new: true });
 
-      return todo;
+      return task;
     },
   },
 };

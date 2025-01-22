@@ -1,11 +1,11 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
 export interface listNameInterface {
   listName: string;
 }
-export interface TodoInterface {
+export interface TaskInterface {
   title: string;
   listName: string;
   detail: string;
@@ -13,7 +13,7 @@ export interface TodoInterface {
   date: Date;
 }
 
-const todoSchema = new Schema<TodoInterface>(
+const taskSchema = new Schema<TaskInterface>(
   {
     title: {
       type: String,
@@ -31,5 +31,5 @@ const listNameSchema = new Schema<listNameInterface>({
   listName: String,
 });
 
-export const Todo = mongoose.model('todo', todoSchema);
-export const listName = mongoose.model('listName', listNameSchema);
+export const Task = mongoose.model("task", taskSchema);
+export const listName = mongoose.model("listName", listNameSchema);

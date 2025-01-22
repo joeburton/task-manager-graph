@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const apollo_server_express_1 = require("apollo-server-express");
 const typeDefs = (0, apollo_server_express_1.gql) `
   scalar Date
-  type Todo {
+  type Task {
     id: ID
     listName: String
     title: String
@@ -17,29 +17,29 @@ const typeDefs = (0, apollo_server_express_1.gql) `
   }
   type Query {
     getListNames: [listName]
-    getTodos: [Todo]
-    getTodo(id: ID): Todo
+    getTasks: [Task]
+    getTask(id: ID): Task
   }
   type Mutation {
     addListName(listName: String): listName
     deleteListName(id: ID): String
-    addTodo(
+    addTask(
       listName: String
       title: String
       detail: String
       complete: Boolean
       date: Date
-    ): Todo
-    deleteTodo(id: ID): String
+    ): Task
+    deleteTask(id: ID): String
     deleteBulk(title: String): String
-    updateTodo(
+    updateTask(
       id: ID
       listName: String
       title: String
       detail: String
       complete: Boolean
       date: Date
-    ): Todo
+    ): Task
   }
 `;
 exports.default = typeDefs;
