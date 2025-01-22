@@ -1,12 +1,12 @@
-# apollo-3-mongoose-integration
+# Task Manager Graph API
 
 #Live
 
 ```
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://apollo-3-mongoose-integration.vercel.app/graphql' \
-  --data '{"query":"{\n    getTodos {id, title, detail, complete, date}\n}","variables":{}}'
+  --url 'https://task-manager-graph.vercel.app/graphql' \
+  --data '{"query":"{\n    getTasks {id, title, detail, complete, date}\n}","variables":{}}'
 ```
 
 #Local
@@ -15,14 +15,14 @@ curl --request POST \
 curl --request POST \
   --header 'content-type: application/json' \
   --url 'http://localhost:4000/graphql' \
-  --data '{"query":"{\n    getTodos {id, title, detail, complete, date}\n}","variables":{}}'
+  --data '{"query":"{\n    getTasks {id, title, detail, complete, date}\n}","variables":{}}'
 ```
 
-### Get Todo
+### Get Task
 
 ```
-query GetTodo {
-  getTodo(id: "62262b1d221387163eacaba5") {
+query GetTask {
+  getTask(id: "62262b1d221387163eacaba5") {
     id
     listName
     title
@@ -33,11 +33,11 @@ query GetTodo {
 }
 ```
 
-### Get Todos
+### Get Tasks
 
 ```
-query GetTodos {
-  getTodos {
+query GetTasks {
+  getTasks {
     id
     listName
     title
@@ -48,11 +48,11 @@ query GetTodos {
 }
 ```
 
-### Add Todo with inline variables
+### Add Task with inline variables
 
 ```
-mutation AddTodo {
-  addTodo(
+mutation AddTask {
+  addTask(
     title: "create id"
     listName: "tech"
     detail: "first detail first detail first detail"
@@ -69,11 +69,11 @@ mutation AddTodo {
 }
 ```
 
-### Add Todo with payload
+### Add Task with payload
 
 ```
-mutation AddTodo($listName: String, $title: String, $detail: String, $complete: Boolean, $date: Date) {
-  addTodo(listName: $listName, title: $title, detail: $detail, complete: $complete, date: $date) {
+mutation AddTask($listName: String, $title: String, $detail: String, $complete: Boolean, $date: Date) {
+  addTask(listName: $listName, title: $title, detail: $detail, complete: $complete, date: $date) {
     id
     listName
     title
@@ -93,22 +93,22 @@ mutation AddTodo($listName: String, $title: String, $detail: String, $complete: 
 }
 ```
 
-### Update Todo with inline variables
+### Update Task with inline variables
 
 ```
-mutation UpdateTodo {
-  updateTodo(id: "620e7406ae4bd45177b85391", title: "This2 is a new titl22e2") {
+mutation UpdateTask {
+  updateTask(id: "620e7406ae4bd45177b85391", title: "This2 is a new titl22e2") {
     id
     title
   }
 }
 ```
 
-### Update Todo with payload
+### Update Task with payload
 
 ```
-mutation UpdateTodo($id: ID, $listName: String, $title: String, $detail: String, $complete: Boolean, $date: Date) {
-  updateTodo(id: $id, listName: $listName, title: $title, detail: $detail, complete: $complete, date: $date) {
+mutation UpdateTask($id: ID, $listName: String, $title: String, $detail: String, $complete: Boolean, $date: Date) {
+  updateTask(id: $id, listName: $listName, title: $title, detail: $detail, complete: $complete, date: $date) {
     id
     listName
     title
@@ -129,11 +129,11 @@ mutation UpdateTodo($id: ID, $listName: String, $title: String, $detail: String,
 }
 ```
 
-### Delete Todo
+### Delete Task
 
 ```
-mutation DeleteTodo {
-  deleteTodo(id:"620e73faae4bd45177b8538f")
+mutation DeleteTask {
+  deleteTask(id:"620e73faae4bd45177b8538f")
 }
 ```
 
