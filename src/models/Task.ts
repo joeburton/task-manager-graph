@@ -2,10 +2,13 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-export interface listNameInterface {
+export interface ListNameInterface {
   listName: string;
+  uid: string;
 }
+
 export interface TaskInterface {
+  uid: string;
   title: string;
   listName: string;
   detail: string;
@@ -13,8 +16,12 @@ export interface TaskInterface {
   date: Date;
 }
 
-const taskSchema = new Schema<TaskInterface>(
+const TaskSchema = new Schema<TaskInterface>(
   {
+    uid: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -27,9 +34,10 @@ const taskSchema = new Schema<TaskInterface>(
   { timestamps: true }
 );
 
-const listNameSchema = new Schema<listNameInterface>({
+const ListNameSchema = new Schema<ListNameInterface>({
   listName: String,
+  uid: String,
 });
 
-export const Task = mongoose.model("task", taskSchema);
-export const listName = mongoose.model("listName", listNameSchema);
+export const Task = mongoose.model("task", TaskSchema);
+export const ListName = mongoose.model("listName", ListNameSchema);
