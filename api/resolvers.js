@@ -15,10 +15,10 @@ const ScalarDate = new graphql_1.GraphQLScalarType({
     name: "Date",
     description: "Date custom scalar type",
     serialize(value) {
-        return new Date(value).toLocaleDateString(); // Convert outgoing Date to integer for JSON
+        return new Date(value).toLocaleDateString(); // Convert outgoing Date to string for JSON
     },
     parseValue(value) {
-        return new Date(value); // Convert incoming integer to Date
+        return new Date(value); // Convert incoming value to Date
     },
     parseLiteral(ast) {
         if (ast.kind === graphql_1.Kind.INT) {
@@ -30,70 +30,163 @@ const ScalarDate = new graphql_1.GraphQLScalarType({
 const resolvers = {
     Date: ScalarDate,
     Query: {
-        getListNames: () => __awaiter(void 0, void 0, void 0, function* () {
-            const listNames = yield Task_1.listName.find();
-            return listNames;
+        getListNames: (_root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                const listNames = yield Task_1.ListName.find({ uid: args.uid });
+                return listNames;
+            }
+            catch (error) {
+                if (error instanceof Error) {
+                    throw new Error(`Failed to get list names: ${error.message}`);
+                }
+                else {
+                    throw new Error("Failed to get list names: unknown error");
+                }
+            }
         }),
-        getTasks: () => __awaiter(void 0, void 0, void 0, function* () {
-            const tasks = yield Task_1.Task.find();
-            return tasks;
+        getTasks: (_root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                const tasks = yield Task_1.Task.find({ uid: args.uid });
+                return tasks;
+            }
+            catch (error) {
+                if (error instanceof Error) {
+                    throw new Error(`Failed to get tasks: ${error.message}`);
+                }
+                else {
+                    throw new Error("Failed to get tasks: unknown error");
+                }
+            }
         }),
-        getTask: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            return yield Task_1.Task.findById(args.id);
+        getTask: (_root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                return yield Task_1.Task.findById(args.id);
+            }
+            catch (error) {
+                if (error instanceof Error) {
+                    throw new Error(`Failed to get task: ${error.message}`);
+                }
+                else {
+                    throw new Error("Failed to get task: unknown error");
+                }
+            }
         }),
     },
     Mutation: {
-        deleteListName: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            yield Task_1.listName.findByIdAndDelete(args.id);
-            return "The list ID has been deleted.";
+        deleteListName: (_root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                yield Task_1.ListName.findByIdAndDelete(args.id);
+                return "The list ID has been deleted.";
+            }
+            catch (error) {
+                if (error instanceof Error) {
+                    throw new Error(`Failed to delete list name: ${error.message}`);
+                }
+                else {
+                    throw new Error("Failed to delete list name: unknown error");
+                }
+            }
         }),
-        addListName: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            const newList = new Task_1.listName({
-                listName: args.listName,
-            });
-            yield newList.save();
-            return newList;
+        addListName: (_root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                const newList = new Task_1.ListName({
+                    listName: args.listName,
+                    uid: args.uid,
+                });
+                yield newList.save();
+                return newList;
+            }
+            catch (error) {
+                if (error instanceof Error) {
+                    throw new Error(`Failed to add list name: ${error.message}`);
+                }
+                else {
+                    throw new Error("Failed to add list name: unknown error");
+                }
+            }
         }),
-        addTask: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            const newTask = new Task_1.Task({
-                title: args.title,
-                listName: args.listName,
-                detail: args.detail,
-                complete: args.complete,
-                date: args.date,
-            });
-            yield newTask.save();
-            return newTask;
+        addTask: (_root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                const newTask = new Task_1.Task({
+                    uid: args.uid,
+                    title: args.title,
+                    listName: args.listName,
+                    detail: args.detail,
+                    complete: args.complete,
+                    date: args.date,
+                });
+                yield newTask.save();
+                return newTask;
+            }
+            catch (error) {
+                if (error instanceof Error) {
+                    throw new Error(`Failed to add task: ${error.message}`);
+                }
+                else {
+                    throw new Error("Failed to add task: unknown error");
+                }
+            }
         }),
-        deleteTask: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            yield Task_1.Task.findByIdAndDelete(args.id);
-            return "The task has been deleted.";
+        deleteTask: (_root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                yield Task_1.Task.findByIdAndDelete(args.id);
+                return "The task has been deleted.";
+            }
+            catch (error) {
+                if (error instanceof Error) {
+                    throw new Error(`Failed to delete task: ${error.message}`);
+                }
+                else {
+                    throw new Error("Failed to delete task: unknown error");
+                }
+            }
         }),
-        deleteBulk: (root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            const result = yield Task_1.Task.deleteMany({ title: args.title });
-            return JSON.stringify(result);
+        deleteBulk: (_root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                const result = yield Task_1.Task.deleteMany({ title: args.title });
+                return JSON.stringify(result);
+            }
+            catch (error) {
+                if (error instanceof Error) {
+                    throw new Error(`Failed to delete tasks in bulk: ${error.message}`);
+                }
+                else {
+                    throw new Error("Failed to delete tasks in bulk: unknown error");
+                }
+            }
         }),
         updateTask: (_root, args) => __awaiter(void 0, void 0, void 0, function* () {
-            const { id, listName, title, detail, complete, date } = args;
-            const updatedTask = {};
-            console.log({ id, title, listName, detail, complete, date });
-            if (title !== undefined) {
-                updatedTask.title = title;
+            try {
+                const { id, listName, title, detail, complete, date } = args;
+                const updatedTask = {};
+                if (title !== undefined) {
+                    updatedTask.title = title;
+                }
+                if (listName !== undefined) {
+                    updatedTask.listName = listName;
+                }
+                if (detail !== undefined) {
+                    updatedTask.detail = detail;
+                }
+                if (complete !== undefined) {
+                    updatedTask.complete = complete;
+                }
+                if (date !== undefined) {
+                    updatedTask.date = date;
+                }
+                const task = yield Task_1.Task.findByIdAndUpdate(id, updatedTask, {
+                    new: true,
+                });
+                return task;
             }
-            if (listName !== undefined) {
-                updatedTask.listName = listName;
+            catch (error) {
+                if (error instanceof Error) {
+                    throw new Error(`Failed to update task: ${error.message}`);
+                }
+                else {
+                    throw new Error("Failed to update task: unknown error");
+                }
             }
-            if (detail !== undefined) {
-                updatedTask.detail = detail;
-            }
-            if (complete !== undefined) {
-                updatedTask.complete = complete;
-            }
-            if (date !== undefined) {
-                updatedTask.date = date;
-            }
-            const task = yield Task_1.Task.findByIdAndUpdate(id, updatedTask, { new: true });
-            return task;
         }),
     },
 };

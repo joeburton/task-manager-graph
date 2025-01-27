@@ -3,10 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.listName = exports.Task = void 0;
+exports.ListName = exports.Task = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
-const taskSchema = new Schema({
+const TaskSchema = new Schema({
+    uid: {
+        type: String,
+        required: true,
+    },
     title: {
         type: String,
         required: true,
@@ -16,8 +20,9 @@ const taskSchema = new Schema({
     complete: Boolean,
     date: Date,
 }, { timestamps: true });
-const listNameSchema = new Schema({
+const ListNameSchema = new Schema({
     listName: String,
+    uid: String,
 });
-exports.Task = mongoose_1.default.model("task", taskSchema);
-exports.listName = mongoose_1.default.model("listName", listNameSchema);
+exports.Task = mongoose_1.default.model("task", TaskSchema);
+exports.ListName = mongoose_1.default.model("listName", ListNameSchema);
